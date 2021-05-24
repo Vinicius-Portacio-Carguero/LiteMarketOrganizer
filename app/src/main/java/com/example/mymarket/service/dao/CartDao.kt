@@ -5,7 +5,6 @@ import android.database.Cursor
 import com.example.mymarket.service.data.DatabaseHelper
 
 class CartDao(context: Context?) {
-
     var contextHelper = DatabaseHelper(context)
 
     fun insertProduct(Produto: String, Quantidade: String, Categoria: String, Valor: Int) {

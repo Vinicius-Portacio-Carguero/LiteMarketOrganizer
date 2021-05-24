@@ -1,6 +1,7 @@
 package com.example.mymarket.view
 
 import android.content.Context
+import android.database.Cursor
 import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,6 +14,7 @@ import com.example.mymarket.MainActivity
 import com.example.mymarket.R
 import com.example.mymarket.service.dao.CartDao
 import com.example.mymarket.service.data.DatabaseHelper
+import com.example.mymarket.viewModel.CartViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_cart.*
 
@@ -20,32 +22,23 @@ import kotlinx.android.synthetic.main.fragment_cart.*
 class CartFragment : Fragment(), View.OnClickListener {
 
     private var helper: DatabaseHelper = DatabaseHelper(context)
-    var dao = context?.let { CartDao(it) }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val view = inflater
+        .inflate(R
+                .layout
+                .fragment_cart, container, false)
 
-        val view = inflater.inflate(R.layout.fragment_cart, container, false)
-        val btn_register = view.findViewById<Button>(R.id.btn_register)
-        val btn_save = view.findViewById<FloatingActionButton>(R.id.btn_save)
+        return view }
 
-        return view
-
-    }
 
     override fun onStart() {
         super.onStart()
 
-        btn_save.setOnClickListener {
-
-            println("@@@@")
-            DatabaseHelper(context).allData
-        }
+        btn_save.setOnClickListener { fetchProducts() }
 
         btn_register.setOnClickListener { formatAndRegister() }
-
 
     }
 
@@ -72,6 +65,7 @@ class CartFragment : Fragment(), View.OnClickListener {
     }
 
     fun CategoryValidation() : String{
+
         var checkBoxText = ""
 
         val checkBoxArr = listOf<CheckBox>(
@@ -108,7 +102,7 @@ class CartFragment : Fragment(), View.OnClickListener {
         registerProduct()
     }
 
-    fun registerProduct() {
+    private fun registerProduct() {
 
         var product = last_product.text.toString()
         var quantity = last_quantity.text.toString()
@@ -116,15 +110,13 @@ class CartFragment : Fragment(), View.OnClickListener {
         var value = 0
 
 
-//        val res = DatabaseHelper(context)
-//        res.insertProduct(product, quantity, category, value)
+        CartViewModel(context).insert(product, quantity, category, value)
 
-        val dao = CartDao(context)
-            dao?.insertProduct(product, quantity, category, value)
+
     }
 
-    fun fetchProducts(){
-
+    private fun fetchProducts() {
+        CartViewModel(context).selectAll
     }
 }
 
