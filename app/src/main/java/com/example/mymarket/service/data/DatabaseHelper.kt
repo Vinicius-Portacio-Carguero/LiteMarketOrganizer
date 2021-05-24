@@ -23,7 +23,7 @@ class DatabaseHelper(context: Context?) : SQLiteOpenHelper(context, "SHOPDB", nu
 
     fun insertProduct(Produto: String, Quantidade: String, Categoria: String, Valor: Int) {
         val db = this.writableDatabase
-        db?.execSQL("INSERT INTO shopCart(PRODUTO, QUANTIDADE, CATEGORIA, VALOR) VALUES('$Produto', '$Quantidade', '$Categoria', 2)")
+        db.execSQL("INSERT INTO shopCart(PRODUTO, QUANTIDADE, CATEGORIA, VALOR) VALUES('$Produto', '$Quantidade', '$Categoria', 2)")
 
     }
 

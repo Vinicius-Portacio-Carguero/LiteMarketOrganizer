@@ -11,15 +11,16 @@ import android.widget.Button
 import android.widget.CheckBox
 import com.example.mymarket.MainActivity
 import com.example.mymarket.R
+import com.example.mymarket.service.dao.CartDao
 import com.example.mymarket.service.data.DatabaseHelper
-import com.example.mymarket.viewModel.CartViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_cart.*
 
 
 class CartFragment : Fragment(), View.OnClickListener {
 
-    private var viewModel: CartViewModel = CartViewModel()
+    private var helper: DatabaseHelper = DatabaseHelper(context)
+    var dao = context?.let { CartDao(it) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,22 +44,7 @@ class CartFragment : Fragment(), View.OnClickListener {
             DatabaseHelper(context).allData
         }
 
-        btn_register.setOnClickListener {
-
-            val textProduct = txt_product.text.toString()
-            val textQuantity = txt_quantity.text.toString()
-
-            if(textQuantity.length > 2) { quantityValueValidation() }
-            else { setLastProduct(textProduct, textQuantity)}
-
-            when(last_category.text){
-                null -> last_category.text = "Sem categoria"
-                "" -> last_category.text = "Sem categoria"
-                " " -> last_category.text = "Sem categoria"
-            }
-            registerProduct()
-
-        }
+        btn_register.setOnClickListener { formatAndRegister() }
 
 
     }
@@ -105,6 +91,8 @@ class CartFragment : Fragment(), View.OnClickListener {
         return checkBoxText
     }
 
+    /**   Repository Formatters   **/
+
     fun formatAndRegister(){
         val textProduct = txt_product.text.toString()
         val textQuantity = txt_quantity.text.toString()
@@ -127,9 +115,15 @@ class CartFragment : Fragment(), View.OnClickListener {
         var category = last_category.text.toString()
         var value = 0
 
-        val res = DatabaseHelper(context)
 
-        res.insertProduct(product, quantity, category, value)
+//        val res = DatabaseHelper(context)
+//        res.insertProduct(product, quantity, category, value)
+
+        val dao = CartDao(context)
+            dao?.insertProduct(product, quantity, category, value)
+    }
+
+    fun fetchProducts(){
 
     }
 }
