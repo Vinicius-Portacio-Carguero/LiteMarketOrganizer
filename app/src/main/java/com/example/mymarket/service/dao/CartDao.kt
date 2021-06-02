@@ -17,9 +17,8 @@ class CartDao(context: Context?) {
         get () {
             val db = contextHelper.writableDatabase
             val res = db.rawQuery("SELECT * FROM shopCart ", null )
-            res.moveToFirst()
 
-            println(res.count)
+            res.moveToFirst()
 
             while (res.moveToNext()) {
                 println("Id : " + res.getString(0) + "\n")

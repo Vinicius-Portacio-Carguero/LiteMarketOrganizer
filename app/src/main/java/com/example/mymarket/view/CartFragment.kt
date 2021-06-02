@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
+import androidx.navigation.fragment.findNavController
 import com.example.mymarket.MainActivity
 import com.example.mymarket.R
 import com.example.mymarket.service.dao.CartDao
@@ -40,6 +41,7 @@ class CartFragment : Fragment(), View.OnClickListener {
 
         btn_register.setOnClickListener { formatAndRegister() }
 
+        btn_to_list.setOnClickListener { findNavController().navigate(R.id.listFragment) }
     }
 
 

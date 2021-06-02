@@ -10,4 +10,10 @@
         android:name="com.example.mymarket.view.CartFragment"
         android:label="fragment_cart"
         tools:layout="@layout/fragment_cart" />
+
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="com.example.mymarket.view.ListFragment"
+        android:label="fragment_list"
+        tools:layout="@layout/fragment_list" />
 </navigation>
