@@ -13,6 +13,7 @@ import android.widget.CheckBox
 import androidx.navigation.fragment.findNavController
 import com.example.mymarket.MainActivity
 import com.example.mymarket.R
+import com.example.mymarket.domain.EnumProducts
 import com.example.mymarket.service.dao.CartDao
 import com.example.mymarket.service.data.DatabaseHelper
 import com.example.mymarket.viewModel.CartViewModel
@@ -104,21 +105,50 @@ class CartFragment : Fragment(), View.OnClickListener {
         registerProduct()
     }
 
+    private fun clearFields(){
+        txt_product.text.clear()
+        txt_quantity.text.clear()
+
+        txt_product.hint = "Adicione o próximo produto"
+    }
+
     private fun registerProduct() {
 
         var product = last_product.text.toString()
         var quantity = last_quantity.text.toString()
         var category = last_category.text.toString()
-        var value = 0
+        var emoji = defineEmoji(CategoryValidation())
 
+        CartViewModel(context).insert(product, quantity, category, emoji)
 
-        CartViewModel(context).insert(product, quantity, category, value)
-
+//        clearFields()
 
     }
 
     private fun fetchProducts() {
         CartViewModel(context).selectAll
+    }
+
+    private fun defineEmoji(category: String): String{
+
+        val emojiValidation =
+           when(category){
+               EnumProducts.LIMPEZA.productType -> return "\uD83E\uDDF9 "
+               EnumProducts.ANIMAIS.productType -> return "🐶"
+               EnumProducts.FRUTAS.productType -> return "🍎 "
+               EnumProducts.FRIOS.productType -> return "🧀 "
+               EnumProducts.HIGIENEPESSOAL.productType -> return "\uD83E\uDDFC"
+               EnumProducts.GRAOS.productType -> return "\uD83C\uDF5A"
+               EnumProducts.CARNES.productType -> return "\uD83E\uDD69"
+               EnumProducts.LATICINIOS.productType -> return "\uD83E\uDD5B"
+               EnumProducts.MATINAIS.productType -> return "\uD83C\uDF6A"
+               EnumProducts.MASSAS.productType -> return "\uD83C\uDF5D "
+               else -> "❓"
+           }
+        return emojiValidation
+
+
+
     }
 }
 

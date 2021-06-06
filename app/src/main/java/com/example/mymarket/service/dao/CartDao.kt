@@ -7,16 +7,20 @@ import com.example.mymarket.service.data.DatabaseHelper
 class CartDao(context: Context?) {
     var contextHelper = DatabaseHelper(context)
 
-    fun insertProduct(Produto: String, Quantidade: String, Categoria: String, Valor: Int) {
+    fun insertProduct(Produto: String, Quantidade: String, Categoria: String, Emoji: String) {
         val db = contextHelper.writableDatabase
-        db.execSQL("INSERT INTO shopCart(PRODUTO, QUANTIDADE, CATEGORIA, VALOR) VALUES('$Produto', '$Quantidade', '$Categoria', 2)")
+        db.execSQL("INSERT INTO shopCart(PRODUTO, QUANTIDADE, CATEGORIA, EMOJI) VALUES('$Produto', '$Quantidade', '$Categoria', '$Emoji')")
     }
 
+    fun deleteAll(){
+        val db = contextHelper.writableDatabase
+        db.execSQL("DELETE FROM shopCart")
+    }
 
     val allData: Cursor
         get () {
             val db = contextHelper.writableDatabase
-            val res = db.rawQuery("SELECT * FROM shopCart ", null )
+            val res = db.rawQuery("SELECT * FROM shopCart", null )
 
             res.moveToFirst()
 
@@ -29,4 +33,26 @@ class CartDao(context: Context?) {
 
             return res
         }
+
+
+    fun insertValue(value: String){
+        var db = contextHelper.writableDatabase
+        db.execSQL("INSERT INTO value(VALOR) VALUES ('$value')")
+    }
+
+    val allPrices: Cursor
+        get () {
+            val db = contextHelper.writableDatabase
+            val res = db.rawQuery("SELECT * FROM shopCart", null )
+
+            res.moveToFirst()
+            while (res.moveToNext()) {
+                println("Id : " + res.getString(0) + "\n")
+                println("Valor : " + res.getString(1) + "\n")
+            }
+
+            return res
+        }
+
+
 }
