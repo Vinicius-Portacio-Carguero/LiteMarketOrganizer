@@ -9,7 +9,8 @@ class ListViewModel(context: Context?) {
     val contextViewModel = context
 
     fun insertValue(value: String){
-        CartDao(contextViewModel).insertValue(value)
+        var dao = CartDao(contextViewModel)
+        dao?.insertValue(value)
     }
 
     val selectAll: Cursor get () { return CartDao(contextViewModel).allPrices }

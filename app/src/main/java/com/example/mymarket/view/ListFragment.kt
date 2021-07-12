@@ -27,6 +27,7 @@ class ListFragment : Fragment(), View.OnClickListener {
                 .layout
                 .fragment_list, container, false)
 
+
         return view
     }
 
@@ -34,7 +35,6 @@ class ListFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         appendData()
-
 
     }
 

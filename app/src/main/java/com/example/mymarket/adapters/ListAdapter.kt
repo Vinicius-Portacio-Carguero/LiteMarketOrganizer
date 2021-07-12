@@ -39,16 +39,7 @@ class ListAdapter( val products: List<ProductValue>): RecyclerView.Adapter<ListA
         holder.txt_value.text = null
 
         holder.btn_buy.setOnClickListener {
-            println("@@@@@@@")
-
-            ListViewModel(ListContext)
-                .insertValue(holder
-                    .txt_value
-                    .text
-                    .toString())
-
-            CartViewModel(ListContext).selectAll
-
+            println("ola mundo")
         }
 
     }
