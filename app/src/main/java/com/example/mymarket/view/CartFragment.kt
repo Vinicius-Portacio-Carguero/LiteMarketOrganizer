@@ -1,8 +1,5 @@
 package com.example.mymarket.view
 
-import android.content.Context
-import android.database.Cursor
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,14 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.navigation.fragment.findNavController
-import com.example.mymarket.MainActivity
 import com.example.mymarket.R
 import com.example.mymarket.domain.EnumProducts
-import com.example.mymarket.service.dao.CartDao
-import com.example.mymarket.service.data.DatabaseHelper
 import com.example.mymarket.viewModel.CartViewModel
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_cart.*
 
 
@@ -41,8 +33,8 @@ class CartFragment : Fragment(), View.OnClickListener {
     override fun onStart() {
         super.onStart()
 
-        btn_save
-            .setOnClickListener { fetchProducts() }
+        btn_clean
+            .setOnClickListener { deleteList() }
 
         btn_register
             .setOnClickListener { registerProduct() }
@@ -133,6 +125,10 @@ class CartFragment : Fragment(), View.OnClickListener {
                else -> "❓"
            }
         return emojiValidation
+    }
+
+    private fun deleteList(){
+        CartViewModel(context).cleanList()
     }
 
 }

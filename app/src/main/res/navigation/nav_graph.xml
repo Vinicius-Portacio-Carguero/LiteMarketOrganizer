@@ -9,11 +9,16 @@
         android:id="@+id/cartFragment"
         android:name="com.example.mymarket.view.CartFragment"
         android:label="fragment_cart"
-        tools:layout="@layout/fragment_cart" />
+        tools:layout="@layout/fragment_cart" >
+        <action
+            android:id="@+id/action_cartFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/listFragment"
         android:name="com.example.mymarket.view.ListFragment"
         android:label="fragment_list"
         tools:layout="@layout/fragment_list" />
+
 </navigation>

@@ -16,4 +16,9 @@ class CartViewModel(context: Context?) {
 
     val selectAll: Cursor get () { return CartDao(contextViewModel).allData }
 
+
+    fun cleanList(){
+        val dao = CartDao(contextViewModel)
+        dao?.deleteAll()
+    }
 }

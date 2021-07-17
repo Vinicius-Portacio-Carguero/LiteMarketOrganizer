@@ -20,7 +20,7 @@ class CartDao(context: Context?) {
     val allData: Cursor
         get () {
             val db = contextHelper.writableDatabase
-            val res = db.rawQuery("SELECT * FROM shopCart", null )
+            val res = db.rawQuery("SELECT * FROM shopCart ORDER BY CATEGORIA ASC", null )
 
             res.moveToFirst()
 
@@ -34,4 +34,9 @@ class CartDao(context: Context?) {
             return res
         }
 
+    fun deleteSelected(Product: String){
+
+        val db = contextHelper.writableDatabase
+            db.execSQL("DELETE FROM shopCart WHERE PRODUTO = '$Product'")
+    }
 }

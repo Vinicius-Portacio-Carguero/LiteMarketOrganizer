@@ -9,10 +9,17 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_main"
         android:layout_width="match_parent"
-        android:layout_height="567dp"
+        android:layout_height="552dp"
         android:layout_alignParentTop="true"
         android:background="@android:color/white"
         tools:listitem="@layout/item_product_in_list" />
+
+    <Button
+        android:id="@+id/btn_back"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:text="Voltar" />
 
 
 </LinearLayout>

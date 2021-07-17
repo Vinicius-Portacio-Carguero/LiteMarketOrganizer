@@ -7,11 +7,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mymarket.R
 import com.example.mymarket.adapters.ListAdapter
 import com.example.mymarket.domain.ProductValue
 import com.example.mymarket.service.dao.CartDao
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_list.*
 import kotlinx.android.synthetic.main.item_product_in_list.*
 
@@ -28,11 +30,17 @@ class ListFragment : Fragment(), View.OnClickListener {
                 .fragment_list, container, false)
 
 
+
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        btn_back.setOnClickListener {
+            println("voltando pra cartFragment")
+            view.findNavController().navigate(R.id.cartFragment)
+        }
 
         appendData()
 

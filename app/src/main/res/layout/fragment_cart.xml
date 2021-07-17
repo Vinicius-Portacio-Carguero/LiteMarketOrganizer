@@ -93,7 +93,7 @@
         app:layout_constraintTop_toBottomOf="@+id/last_product" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_save"
+        android:id="@+id/btn_clean"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="333dp"
@@ -102,7 +102,8 @@
         android:layout_marginRight="23dp"
         android:layout_marginBottom="152dp"
         android:clickable="true"
-        android:src="@android:drawable/ic_menu_save"
+        android:src="@android:drawable/ic_menu_delete"
+        app:backgroundTint="#FA2F2F"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -131,11 +132,11 @@
         android:layout_marginEnd="25dp"
         android:layout_marginRight="25dp"
         android:layout_marginBottom="126dp"
-        android:text="Ver Lista"
+        android:text="Iniciar Compra"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/textView3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_save"
+        app:layout_constraintTop_toBottomOf="@+id/btn_clean"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
@@ -143,13 +144,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="7dp"
-        android:layout_marginEnd="3dp"
-        android:layout_marginRight="3dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginBottom="126dp"
-        android:text="Iniciar compra"
+        android:text="Limpar lista"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_save"
+        app:layout_constraintTop_toBottomOf="@+id/btn_clean"
         app:layout_constraintVertical_bias="0.0" />
 
     <Spinner

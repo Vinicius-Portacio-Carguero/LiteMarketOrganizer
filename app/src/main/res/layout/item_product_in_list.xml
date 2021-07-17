@@ -66,13 +66,27 @@
 
             <Button
                 android:id="@+id/btn_buy"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
 
-                android:layout_marginTop="13dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/item_buttons_corners"
                 android:gravity="center"
-                android:text="Comprado !"
+                android:text="OK"
+                android:textColor="#ffffff"
+                android:textSize="13dp" />
+
+            <Button
+                android:id="@+id/btn_remove"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="100dp"
+                android:backgroundTint="#FA2F2F"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/item_buttons_corners"
+                android:gravity="center"
+                android:text="X"
                 android:textColor="#ffffff"
                 android:textSize="13dp" />
         </RelativeLayout>
