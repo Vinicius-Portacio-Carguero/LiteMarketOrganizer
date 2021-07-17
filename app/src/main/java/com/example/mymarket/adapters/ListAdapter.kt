@@ -8,12 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.ListFragment
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mymarket.viewModel.CartViewModel
-import com.example.mymarket.viewModel.ListViewModel
-import kotlin.coroutines.coroutineContext
 
 class ListAdapter( val products: List<ProductValue>): RecyclerView.Adapter<ListAdapter.ListViewHolder>(){
 
@@ -36,12 +32,6 @@ class ListAdapter( val products: List<ProductValue>): RecyclerView.Adapter<ListA
         holder.txt_category.text = products.category
         holder.txt_quantity.text = products.quantity
 
-        holder.txt_value.text = null
-
-        holder.btn_buy.setOnClickListener {
-            println("ola mundo")
-        }
-
     }
 
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
@@ -51,9 +41,8 @@ class ListAdapter( val products: List<ProductValue>): RecyclerView.Adapter<ListA
         val txt_category: TextView = itemView.txt_category
         val txt_quantity: TextView = itemView.txt_quantity
 
-        val txt_value: TextView by lazy {  itemView.txt_value}
-        val btn_buy: Button by lazy { itemView.btn_buy }
 
     }
+
 
 }

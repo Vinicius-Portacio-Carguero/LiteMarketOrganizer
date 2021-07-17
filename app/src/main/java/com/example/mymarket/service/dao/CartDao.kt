@@ -34,25 +34,4 @@ class CartDao(context: Context?) {
             return res
         }
 
-
-    fun insertValue(value: String){
-        var db = contextHelper.writableDatabase
-        db.execSQL("INSERT INTO value(VALOR) VALUES ('$value')")
-    }
-
-    val allPrices: Cursor
-        get () {
-            val db = contextHelper.writableDatabase
-            val res = db.rawQuery("SELECT * FROM shopCart", null )
-
-            res.moveToFirst()
-            while (res.moveToNext()) {
-                println("Id : " + res.getString(0) + "\n")
-                println("Valor : " + res.getString(1) + "\n")
-            }
-
-            return res
-        }
-
-
 }

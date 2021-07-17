@@ -4,12 +4,12 @@ import android.content.Context
 import android.database.Cursor
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.CheckBox
+import android.widget.*
 import androidx.navigation.fragment.findNavController
 import com.example.mymarket.MainActivity
 import com.example.mymarket.R
@@ -18,91 +18,74 @@ import com.example.mymarket.service.dao.CartDao
 import com.example.mymarket.service.data.DatabaseHelper
 import com.example.mymarket.viewModel.CartViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_cart.*
 
 
 class CartFragment : Fragment(), View.OnClickListener {
 
-    private var helper: DatabaseHelper = DatabaseHelper(context)
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater,
+                              container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         val view = inflater
-        .inflate(R
+                .inflate(R
                 .layout
-                .fragment_cart, container, false)
+                .fragment_cart,
+                    container,
+                    false)
 
-        return view }
-
+        return view
+    }
 
     override fun onStart() {
         super.onStart()
 
-        btn_save.setOnClickListener { fetchProducts() }
+        btn_save
+            .setOnClickListener { fetchProducts() }
 
-        btn_register.setOnClickListener { formatAndRegister() }
+        btn_register
+            .setOnClickListener { registerProduct() }
 
-        btn_to_list.setOnClickListener { findNavController().navigate(R.id.listFragment) }
+        btn_to_list
+            .setOnClickListener { findNavController().navigate(R.id.listFragment) }
+
+
+        categorySetup()
     }
-
 
     override fun onClick(v: View) { }
 
-    fun setLastProduct(product: String, quantity: String) {
+    // input product, quantity and category
+    // set last data
+    // register last data
 
-        txt_quantity.setTextColor(Color.parseColor("#363636"))
+    fun doLastProduct(){
 
-        println("Produto = $product // Quantidade = $quantity // Categoria: ${CategoryValidation()}")
+        val product = txt_product.text.toString()
+        val quantity = txt_quantity.text.toString()
 
         last_product.text = product
         last_quantity.text = quantity
-        last_category.text = CategoryValidation()
-    }
-
-    fun quantityValueValidation() {
-
-        txt_quantity.setTextColor(Color.parseColor("#fc2c03"))
-        txt_product.setText("")
-        txt_product.setHint("Valor não permitido")
 
     }
 
-    fun CategoryValidation() : String{
+    fun categorySetup(){
 
-        var checkBoxText = ""
+        var lista = resources.getStringArray(R.array.categories_values)
 
-        val checkBoxArr = listOf<CheckBox>(
-            checkBox, checkBox2,
-            checkBox3, checkBox4,
-            checkBox5, checkBox6,
-            checkBox7, checkBox8,
-            checkBox9, checkBox10
-        )
+        spinner_category.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, lista)
 
-        for(i in 0..checkBoxArr.size - 1){
+        spinner_category.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
-             if(checkBoxArr[i].isChecked) { checkBoxText = checkBoxArr[i].text.toString() }
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+
+                last_category.text = lista[position]
+            }
 
         }
-
-        return checkBoxText
-    }
-
-    /**   Repository Formatters   **/
-
-    fun formatAndRegister(){
-        val textProduct = txt_product.text.toString()
-        val textQuantity = txt_quantity.text.toString()
-
-        if(textQuantity.length > 2) { quantityValueValidation() }
-        else { setLastProduct(textProduct, textQuantity)}
-
-        when(last_category.text){
-            null -> last_category.text = "Sem categoria"
-            "" -> last_category.text = "Sem categoria"
-            " " -> last_category.text = "Sem categoria"
-        }
-        registerProduct()
     }
 
     private fun clearFields(){
@@ -114,11 +97,15 @@ class CartFragment : Fragment(), View.OnClickListener {
 
     private fun registerProduct() {
 
+        doLastProduct()
+
         var product = last_product.text.toString()
         var quantity = last_quantity.text.toString()
         var category = last_category.text.toString()
-        var emoji = defineEmoji(CategoryValidation())
+        var emoji = defineEmoji(last_category.text.toString())
 
+
+        Log.i("Inserting", "Produto: $product, Quantidade: $quantity, Categoria: $category, emoji: $emoji")
         CartViewModel(context).insert(product, quantity, category, emoji)
 
 //        clearFields()
@@ -146,10 +133,8 @@ class CartFragment : Fragment(), View.OnClickListener {
                else -> "❓"
            }
         return emojiValidation
-
-
-
     }
+
 }
 
 

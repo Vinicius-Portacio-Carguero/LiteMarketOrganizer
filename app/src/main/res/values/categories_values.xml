@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="categories_values">
+        <item> Sem Categoria </item>
+        <item> 🧹 Limpeza  </item>
+        <item> 🐶 Animais </item>
+        <item> 🍎 Frutas </item>
+        <item> 🧀 Frios </item>
+        <item> 🧼 Higiene pessoal </item>
+        <item> 🍚 Grãos  </item>
+        <item> 🥩 Carnes </item>
+        <item> 🥛 Laticínios </item>
+        <item> 🍪 Matinais </item>
+        <item> 🍝 Massas </item>
+    </string-array>
+</resources>
