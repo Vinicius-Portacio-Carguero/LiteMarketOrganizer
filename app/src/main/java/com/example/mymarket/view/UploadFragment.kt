@@ -38,22 +38,21 @@ class UploadFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val list = field_import.text.toString()
+
 
         btn_process.setOnClickListener {
-            println("@@@@")
-            println(list)
+            println(field_import.text.toString())
 
-            processList(list)
+            splitElements(field_import.text.toString())
         }
     }
 
-    fun processList(list: String) {
-        var splitedList = list.split(",")
+    fun splitElements(list: String) {
+        var splitedList = list.split(",", "-")
+
+        splitedList.toMutableList().add(0, "organizational item")
 
         println(splitedList)
-
-
     }
 
     override fun onClick(v: View) { }
