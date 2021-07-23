@@ -42,6 +42,9 @@ class CartFragment : Fragment(), View.OnClickListener {
         btn_to_list
             .setOnClickListener { findNavController().navigate(R.id.listFragment) }
 
+        btn_import
+            .setOnClickListener { findNavController().navigate(R.id.uploadFragment)}
+
 
         categorySetup()
     }

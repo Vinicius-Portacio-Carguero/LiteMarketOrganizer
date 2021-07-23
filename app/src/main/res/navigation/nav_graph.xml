@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/cartFragment">
+    app:startDestination="@id/uploadFragment">
 
     <fragment
         android:id="@+id/cartFragment"
@@ -13,6 +13,10 @@
         <action
             android:id="@+id/action_cartFragment_to_listFragment"
             app:destination="@id/listFragment" />
+        <action
+            android:id="@+id/action_cartFragment_to_uploadFragment"
+            app:destination="@id/uploadFragment" />
+
     </fragment>
 
     <fragment
@@ -20,5 +24,11 @@
         android:name="com.example.mymarket.view.ListFragment"
         android:label="fragment_list"
         tools:layout="@layout/fragment_list" />
+
+    <fragment
+        android:id="@+id/uploadFragment"
+        android:name="com.example.mymarket.view.UploadFragment"
+        android:label="fragment_upload"
+        tools:layout="@layout/fragment_upload" />
 
 </navigation>
