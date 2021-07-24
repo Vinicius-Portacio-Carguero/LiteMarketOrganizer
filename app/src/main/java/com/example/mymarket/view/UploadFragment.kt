@@ -23,7 +23,6 @@ import kotlinx.android.synthetic.main.fragment_upload.*
 
 class UploadFragment : Fragment(), View.OnClickListener {
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater
@@ -38,22 +37,54 @@ class UploadFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
         btn_process.setOnClickListener {
-            println(field_import.text.toString())
-
-            splitElements(field_import.text.toString())
+            insertValueAndProduct()
         }
     }
 
-    fun splitElements(list: String) {
-        var splitedList = list.split(",", "-")
+    fun doPersist(product: String, quantity: String, category : String, emoji: String){
+        CartViewModel(context).insert(product, quantity, category, emoji)
 
-        splitedList.toMutableList().add(0, "organizational item")
-
-        println(splitedList)
     }
+
+    fun insertValueAndProduct(){
+
+        val list = realocateElementsInList()
+
+        for(i in 0..list.size -2){
+            val splitedList = list[i+1].split("-")
+
+            val quantity = splitedList[0]
+            val product = splitedList[1]
+
+            println("Q: $quantity P: $product")
+
+            doPersist(product, quantity, "Sem categoria", "❓")
+        }
+
+    }
+
+    fun realocateElementsInList(): MutableList<String>{
+
+        val list = mutableListOf("items> ")
+
+        val splitList = splitElements(field_import.text.toString())
+
+        for(i in 0..splitList.size - 1){
+            list.add(i + 1, splitList[i])
+        }
+        println(list)
+        return list
+    }
+
+    fun splitElements(list: String): MutableList<String> {
+        var splitedList = list
+            .split(",")
+            .toMutableList()
+
+        return splitedList
+    }
+
 
     override fun onClick(v: View) { }
 }
