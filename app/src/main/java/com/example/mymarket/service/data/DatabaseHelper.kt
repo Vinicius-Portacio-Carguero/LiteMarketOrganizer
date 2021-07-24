@@ -9,6 +9,7 @@ class DatabaseHelper(context: Context?) : SQLiteOpenHelper(context, "SHOPDB", nu
     override fun onCreate(db: SQLiteDatabase) {
 
         db.execSQL("CREATE TABLE shopCart(ID INTEGER PRIMARY KEY AUTOINCREMENT, PRODUTO TEXT, QUANTIDADE TEXT, CATEGORIA TEXT, EMOJI TEXT)")
+        db.execSQL("INSERT INTO shopCart(PRODUTO, QUANTIDADE, CATEGORIA, EMOJI) VALUES('Produto', 'Quantidade', 'Categoria', '@')")
 
     }
 

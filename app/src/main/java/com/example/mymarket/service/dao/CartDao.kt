@@ -14,7 +14,7 @@ class CartDao(context: Context?) {
 
     fun deleteAll(){
         val db = contextHelper.writableDatabase
-        db.execSQL("DELETE FROM shopCart")
+        db.execSQL("DELETE FROM shopCart WHERE EMOJI != '@'")
     }
 
     val allData: Cursor

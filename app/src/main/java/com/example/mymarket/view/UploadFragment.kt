@@ -62,6 +62,8 @@ class UploadFragment : Fragment(), View.OnClickListener {
             doPersist(product, quantity, "Sem categoria", "❓")
         }
 
+        findNavController().navigate(R.id.listFragment)
+
     }
 
     fun realocateElementsInList(): MutableList<String>{
