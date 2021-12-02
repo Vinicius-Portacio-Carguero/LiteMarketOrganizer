@@ -7,9 +7,10 @@ import com.example.mymarket.service.data.DatabaseHelper
 class CartDao(context: Context?) {
     var contextHelper = DatabaseHelper(context)
 
-    fun insertProduct(Produto: String, Quantidade: String, Categoria: String, Emoji: String) {
+    suspend fun insertProduct(Produto: String, Quantidade: String, Categoria: String, Emoji: String) {
         val db = contextHelper.writableDatabase
         db.execSQL("INSERT INTO shopCart(PRODUTO, QUANTIDADE, CATEGORIA, EMOJI) VALUES('$Produto', '$Quantidade', '$Categoria', '$Emoji')")
+        db.execSQL("INSERT INTO inventory(PRODUTO, QUANTIDADE, CATEGORIA, EMOJI) VALUES('$Produto', '$Quantidade', '$Categoria', '$Emoji')")
     }
 
     fun deleteAll(){
@@ -35,8 +36,13 @@ class CartDao(context: Context?) {
         }
 
     fun deleteSelected(Product: String){
-
         val db = contextHelper.writableDatabase
             db.execSQL("DELETE FROM shopCart WHERE PRODUTO = '$Product'")
+    }
+
+    fun updateValue(quantity: Int, product: String) {
+        val db = contextHelper.writableDatabase
+            db.execSQL("UPDATE shopCart WHERE PRODUTO = '$product'")
+
     }
 }

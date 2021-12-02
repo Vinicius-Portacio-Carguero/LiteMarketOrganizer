@@ -1,9 +1,9 @@
-package com.example.mymarket.viewModel
+package com.example.mymarket.Repository
 
 import android.content.Context
 import com.example.mymarket.service.dao.CartDao
 
-class ListViewModel(context: Context?) {
+class ListRepository(context: Context?) {
 
     val contextViewModel = context
 

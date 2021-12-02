@@ -7,14 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.mymarket.R
 import com.example.mymarket.domain.EnumProducts
+import com.example.mymarket.Repository.CartRepository
 import com.example.mymarket.viewModel.CartViewModel
 import kotlinx.android.synthetic.main.fragment_cart.*
 
 
 class CartFragment : Fragment(), View.OnClickListener {
+
+    private val viewModel: CartViewModel by viewModels()
 
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -101,14 +105,14 @@ class CartFragment : Fragment(), View.OnClickListener {
 
 
         Log.i("Inserting", "Produto: $product, Quantidade: $quantity, Categoria: $category, emoji: $emoji")
-        CartViewModel(context).insert(product, quantity, category, emoji)
+//        CartRepository(context).insert(product, quantity, category, emoji)
 
 //        clearFields()
 
     }
 
     private fun fetchProducts() {
-        CartViewModel(context).selectAll
+//        CartRepository(context).selectAll
     }
 
     private fun defineEmoji(category: String): String{
@@ -131,7 +135,7 @@ class CartFragment : Fragment(), View.OnClickListener {
     }
 
     private fun deleteList(){
-        CartViewModel(context).cleanList()
+//        CartRepository(context).cleanList()
     }
 
 }

@@ -1,5 +1,15 @@
 <resources>
     <string name="app_name">📝 Lista de compras </string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="tv_product_name">Product name</string>
+    <string name="tv_qtt">QTT.</string>
+    <string name="tv_last_product">Last Product</string>
+    <string name="tv_last_category">Category</string>
+    <string name="tv_list">List</string>
+    <string name="tv_import">Import</string>
+    <string name="tv_delete">Delete all</string>
+
+    <string name="btn_save">Save</string>
+
 </resources>

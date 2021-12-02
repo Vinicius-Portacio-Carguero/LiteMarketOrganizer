@@ -1,24 +1,28 @@
 package com.example.mymarket.viewModel
 
-import android.content.Context
-import android.database.Cursor
-import com.example.mymarket.service.dao.CartDao
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.mymarket.Repository.CartRepository
+import kotlinx.coroutines.launch
+import java.lang.Exception
+import javax.inject.Inject
 
-class CartViewModel(context: Context?) {
+class CartViewModel(application: Application) : AndroidViewModel(application) {
 
-    val contextViewModel = context
-
+    @Inject
+    lateinit var repository: CartRepository
 
     fun insert(Produto: String, Quantidade: String, Categoria: String, Emoji: String){
-        val dao = CartDao(contextViewModel)
-        dao?.insertProduct(Produto, Quantidade, Categoria, Emoji)
+        viewModelScope.launch {
+            try{
+
+                repository.insert(Produto, Quantidade, Categoria, Emoji)
+
+            } catch (e: Exception){
+
+            }
+        }
     }
 
-    val selectAll: Cursor get () { return CartDao(contextViewModel).allData }
-
-
-    fun cleanList(){
-        val dao = CartDao(contextViewModel)
-        dao?.deleteAll()
-    }
 }
